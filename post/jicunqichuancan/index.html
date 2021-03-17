@@ -1,0 +1,449 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>大人，食大便了 | 毀滅拳王的博客</title>
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1615957622479">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="大人，食大便了 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="食
+C 语言程序在发生函数调用时内存中发生的变化，简单地说，就是这些：
+
+参数按顺序入栈（最左侧的参数在运行时栈的最上方）
+返回地址（即调用函数返回后要执行的指令地址）入栈
+ebp 入栈（然后 esp = esp - 1）
+更新指令指针寄存..." />
+    <meta name="keywords" content="体系结构,C" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      function load()
+      {
+        var _k = document.getElementsByClassName("post-content")
+        _k[0].innerHTML = _k[0].innerHTML.replace("", "/")
+      }
+    </script>
+  
+  </head>
+  <body onload="load()">
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://kpgong.github.io/">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1615957622479" alt="">
+  </a>
+  <h1 class="site-title">
+    毀滅拳王的博客
+  </h1>
+  <p class="site-description">
+    我汗都没流呢！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/kpgong" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              大人，食大便了
+            </h2>
+            <div class="post-info">
+              <span>
+                2021年02月16日
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://kpgong.github.io/tag/ti-xi-jie-gou/" class="post-tag">
+                  # 体系结构
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/c/" class="post-tag">
+                  # C
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="食">食</h1>
+<p>C 语言程序在发生函数调用时内存中发生的变化，简单地说，就是这些：</p>
+<blockquote>
+<p>参数按顺序入栈（最左侧的参数在运行时栈的最上方）</p>
+<p>返回地址（即调用函数返回后要执行的指令地址）入栈</p>
+<p>ebp 入栈（然后 esp = esp - 1）</p>
+<p>更新指令指针寄存器（IP，或者叫程序计数器，PC）为被调函数的首指令地址</p>
+<p>开辟新栈帧（ebp = esp、然后 esp -= size_of_stack_frame）</p>
+</blockquote>
+<p>这样的运行时栈内存布局的示意图如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">低地址</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">esp-&gt;</td>
+<td style="text-align:center">（栈帧的顶部）</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center">......</td>
+</tr>
+<tr>
+<td style="text-align:left">ebp-&gt;</td>
+<td style="text-align:center">上一栈帧的ebp</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center">返回地址</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center">参数 1</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center">参数 2</td>
+</tr>
+<tr>
+<td style="text-align:left">高地址</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>所以传入的参数的地址可以算出来。对于大多数计算机，参数 1 所在地址就是寄存器 ebp 中的值减去 8，也可以用寄存器 esp 中的值来计算，因为栈帧的大小是在编译时确定的。</p>
+<h1 id="大">大</h1>
+<p>C 和类 C 语言基本上都有这种运行时栈。考察下面这段 C 代码：</p>
+<pre><code class="language-cpp">// sdbl.c
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct S
+{
+    int a;
+    int b;
+} S;
+
+S* constructor_S()
+{
+    S* this = (S*) malloc(sizeof(S));
+    printf(&quot;S [%p] is being constructed.\n&quot;, this);
+    return this;
+}
+
+void destructor_S(S* this)
+{
+    printf(&quot;S [%p] is being destructed.\n&quot;, this);
+    free(this);
+}
+
+int getA_S(S* this)
+{
+    return this-&gt;a;
+}
+
+int main()
+{
+    S* ptr = constructor_S();
+    int a = getA_S(ptr);
+    destructor_S(ptr);
+    return 0;
+}
+</code></pre>
+<p>在 x64 的 linux 上使用 <code>gcc</code> 生成可执行文件，然后使用 <code>objdump</code> 查看反汇编：</p>
+<pre><code class="language-cpp">gcc -g -O0 sdbl.c -o sdbl.c.out
+objdump -d sdbl.c.out
+</code></pre>
+<pre><code class="language-cpp">0000000000001189 &lt;destructor_S&gt;:
+    1189:    push   %rbp
+    118a:    mov    %rsp,%rbp
+    118d:    sub    $0x10,%rsp
+    1191:    mov    %rdi,-0x8(%rbp)
+    1195:    mov    -0x8(%rbp),%rax
+    1199:    mov    %rax,%rsi
+    119c:    lea    0xe7f(%rip),%rdi        # 2022 &lt;_IO_stdin_used+0x22&gt;
+    11a3:    mov    $0x0,%eax
+    11a8:    callq  1040 &lt;printf@plt&gt;
+    11ad:    mov    -0x8(%rbp),%rax
+    11b1:    mov    %rax,%rdi
+    11b4:    callq  1030 &lt;free@plt&gt;
+    11b9:    nop
+    11ba:    leaveq
+    11bb:    retq
+
+00000000000011bc &lt;getA_S&gt;:
+    11bc:    push   %rbp
+    11bd:    mov    %rsp,%rbp
+    11c0:    mov    %rdi,-0x8(%rbp)
+    11c4:    mov    -0x8(%rbp),%rax
+    11c8:    mov    (%rax),%eax
+    11ca:    pop    %rbp
+    11cb:    retq
+
+00000000000011cc &lt;main&gt;:
+    11cc:    push   %rbp
+    11cd:    mov    %rsp,%rbp
+    11d0:    sub    $0x10,%rsp
+    11d4:    mov    $0x0,%eax
+    11d9:    callq  1155 &lt;constructor_S&gt;
+    11de:    mov    %rax,-0x8(%rbp)
+    11e2:    mov    -0x8(%rbp),%rax
+    11e6:    mov    %rax,%rdi           # rdi = ptr
+    11e9:    callq  11bc &lt;getA_S&gt;
+    11ee:    mov    %eax,-0xc(%rbp)
+    11f1:    mov    -0x8(%rbp),%rax
+    11f5:    mov    %rax,%rdi
+    11f8:    callq  1189 &lt;destructor_S&gt;
+    11fd:    mov    $0x0,%eax
+    1202:    leaveq
+    1203:    retq
+</code></pre>
+<p>主函数里面有四次函数调用，但是没有一个 <code>push</code> 指令。而每次调用需参函数时 <code>call</code> 指令的前面都有若干次写通用寄存器。这似乎不对。</p>
+<p>考察 <code>0x11e6</code> 处的指令，它将局部变量 <code>ptr</code> 的值存入了寄存器 rdi 中，然后控制流跳转到函数 <code>getA_S</code> 中。再观察函数 <code>getA_S</code> 的反汇编，可以推测寄存器 rdi 用于暂存参数！<code>0x11f5</code> 处的指令和 <code>destructor_S</code> 函数的反汇编也验证了这一点。这个程序根本没有把参数压入运行时栈中！</p>
+<h1 id="便">便</h1>
+<p>上面的操作是在 x86-64 的计算机上进行的。什么是 x86-64？x86-64 是指 CPU 的指令集架构。x86-64 架构是由超微半导体（AMD）在英特尔的 x86 架构上扩展而来的，又叫“x64”“AMD64”“Intel 64”。“64” 的意思就是 64 位字长，而 x86 是 32 位字长的架构。因为字长不同，所以这两个架构的 CPU 的寄存器也会不同。</p>
+<p>简单地说，能让程序员自由使用的寄存器就是<strong>通用寄存器（通用目的寄存器，General-purpose register，GPR）</strong>。<code>rax</code> 是，<code>eax</code> 也是。x86 有 8 个 32 位的通用寄存器。x64 有 16 个 64 位的通用寄存器。x64 的寄存器如下图：</p>
+<figure data-type="image" tabindex="1"><img src="https://kpgong.github.io//post-images/1613405797522.png" alt="x64 的寄存器示意图" loading="lazy"></figure>
+<p>就像 IA32 兼容 IA16 那样，x64 也是兼容 x32 的。而 r8~r15 是 x64 新加入的通用寄存器。x64 的字长为 64，所以 32 位的寄存器不能完整记下它的地址了，所以寄存器 rsp 和 rbp 取代了 esp 和 ebp。x64 有着更多的寄存器，所以没有必要把参数存入 RAM 中的运行时栈了。使用寄存器暂存参数，程序会更快。</p>
+<p>使用寄存器暂存参数，另一个好处是，某些函数甚至不需要栈帧。下面使用 <code>-Og</code> 优化选项来编译 <code>sdbl.c</code>，然后查看函数 <code>getA_S</code> 的反汇编：</p>
+<pre><code class="language-cpp">000000000000119e &lt;getA_S&gt;:
+    119e:    mov    (%rdi),%eax
+    11a0:    retq
+</code></pre>
+<p>函数 <code>getA_S</code> 不需要栈帧、所有局部变量都存于寄存器中、也不调用其他函数。像这样的函数叫作<strong>叶子过程</strong>（把函数调用看作树形结构）。函数 <code>max</code> 是另一个叶子过程的例子，它返回两个 64 位无符号整数中的最大值。更多的寄存器换来了更少的时间和空间消耗。AMD, yes!</p>
+<pre><code class="language-cpp">0000000000001180 &lt;max&gt;:
+    1180:    cmp    %rsi,%rdi
+    1183:    mov    %rsi,%rax
+    1186:    cmovae %rdi,%rax # 大于等于时传送
+    118a:    retq
+</code></pre>
+<h1 id="了">了</h1>
+<p>如果函数需要很多参数，参数就不能都存在寄存器中了。那么寄存器中可以存多少参数呢？我想，不会有语言标准来定义这个限制。不同的编译器应该有不同的行为。但我还是想看看我使用的环境是什么样的。</p>
+<pre><code class="language-cpp">// sdbl2.cpp
+#include &lt;cstdio&gt;
+
+void print(void) {}
+
+template &lt;typename... Args&gt;
+void print(size_t f, Args... args)
+{
+    printf(&quot;%llu @ 0x%llx\n&quot;, f, (size_t) &amp;f);
+    print(args...);
+}
+
+int main()
+{
+    size_t a = 0x9000000000;
+    print(a, a + 1, a + 2, a + 3, a + 4, a + 5, a + 6, a + 7, a + 8);
+    return 0;
+}
+</code></pre>
+<pre><code class="language-cpp">gcc -S sdbl2.cpp
+</code></pre>
+<pre><code class="language-cpp"># sdbl2.s
+main:
+.LFB3:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	subq	$16, %rsp
+	movabsq	$618475290624, %rax
+	movq	%rax, -8(%rbp)
+	movq	-8(%rbp), %rax
+	leaq	8(%rax), %r9
+	movq	-8(%rbp), %rax
+	leaq	7(%rax), %r8
+	movq	-8(%rbp), %rax
+	leaq	6(%rax), %rdi
+	movq	-8(%rbp), %rax
+	leaq	5(%rax), %r11
+	movq	-8(%rbp), %rax
+	leaq	4(%rax), %r10
+	movq	-8(%rbp), %rax
+	leaq	3(%rax), %rcx
+	movq	-8(%rbp), %rax
+	leaq	2(%rax), %rdx
+	movq	-8(%rbp), %rax
+	leaq	1(%rax), %rsi
+	movq	-8(%rbp), %rax
+	subq	$8, %rsp
+	pushq	%r9         # 入栈
+	pushq	%r8         # 入栈
+	pushq	%rdi        # 入栈
+	movq	%r11, %r9   # r11 寄存器实际上不参与参数传递
+	movq	%r10, %r8   # r10 寄存器实际上不参与参数传递
+	movq	%rax, %rdi  # rax 寄存器实际上不参与参数传递
+	call	_Z5printIJmmmmmmmmEEvmDpT_
+	addq	$32, %rsp
+	movl	$0, %eax
+	leave
+	ret
+</code></pre>
+<p>用了 6 个 GPR 存放参数。【gcc (Debian 10.2.0-19) 10.2.0】</p>
+<p>不同的编译选用的 GPR 也是不一样的。下面是 VS 2019 编译生成的 <code>sdbl.c</code> 的反汇编，它优先用 rcx 寄存器。gcc 优先用 rdi 寄存器。</p>
+<pre><code class="language-cpp"># &lt;getA_S&gt;:
+7FF64F2F1140  mov      qword ptr [this],rcx  
+7FF64F2F1145  mov      rax,qword ptr [this]  
+7FF64F2F114A  mov      eax,dword ptr [rax]  
+7FF64F2F114C  ret  
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A3%9F">食</a></li>
+<li><a href="#%E5%A4%A7">大</a></li>
+<li><a href="#%E4%BE%BF">便</a></li>
+<li><a href="#%E4%BA%86">了</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://kpgong.github.io/post/shulun-1/">
+              <h3 class="post-title">
+                你也想像我一样口算 1030 mod 11 吗
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7ac54ec3f16b2bdb699a',
+    clientSecret: '89e58eb58e716f67ad2ab49d108a474b7906035f',
+    repo: 'kpgong.github.io',
+    owner: 'kpgong',
+    admin: ['kpgong'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://kpgong.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

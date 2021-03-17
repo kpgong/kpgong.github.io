@@ -1,0 +1,357 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>写 BootLoader | 毀滅拳王的博客</title>
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1615957622479">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="写 BootLoader | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+很多东西都有历史的痕迹。反正都是考古，不如直接转入考古专业。
+
+引导程序和主引导记录
+引导程序（BootLoader）是一种程序。它的运行时机是 BIOS 上电自检之后、OS 内核运行之前，主要作用是检测计算机硬件、配置 OS 内核运行所..." />
+    <meta name="keywords" content="体系结构,OS" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      function load()
+      {
+        var _k = document.getElementsByClassName("post-content")
+        _k[0].innerHTML = _k[0].innerHTML.replace("", "/")
+      }
+    </script>
+  
+  </head>
+  <body onload="load()">
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://kpgong.github.io/">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1615957622479" alt="">
+  </a>
+  <h1 class="site-title">
+    毀滅拳王的博客
+  </h1>
+  <p class="site-description">
+    我汗都没流呢！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/kpgong" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              写 BootLoader
+            </h2>
+            <div class="post-info">
+              <span>
+                2021年02月16日
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://kpgong.github.io/tag/ti-xi-jie-gou/" class="post-tag">
+                  # 体系结构
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/os/" class="post-tag">
+                  # OS
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>很多东西都有历史的痕迹。反正都是考古，不如直接转入考古专业。</p>
+</blockquote>
+<h1 id="引导程序和主引导记录">引导程序和主引导记录</h1>
+<p><strong>引导程序</strong>（BootLoader）是一种程序。它的运行时机是 BIOS 上电自检之后、OS 内核运行之前，主要作用是检测计算机硬件、配置 OS 内核运行所需要的参数、加载 OS 内核。引导可以分成两个阶段，分别由 Boot 和 Loader 程序执行。</p>
+<p><strong>主引导记录</strong>（Master Boot Record，MBR，主引导扇区，Master Boot Sector）是计算机启动后访问硬盘所必须要读取的首个扇区。它在硬盘上的地址为（柱面，磁头，扇区）=(0, 0, 1)。主引导扇区大小为 512 字节。</p>
+<h1 id="主引导记录的结构">主引导记录的结构</h1>
+<h2 id="第一阶段引导程序boot">第一阶段引导程序（Boot）</h2>
+<p>主引导记录的第一部分是第一阶段引导程序。它的主要作用是检查分区表是否正确并启动第二阶段的引导程序。它不依赖于任何 OS，可以实现多 OS 引导。</p>
+<h2 id="硬盘分区表">硬盘分区表</h2>
+<p>硬盘分区表记录的是硬盘分区结构信息。</p>
+<h2 id="魔数标志">魔数标志</h2>
+<p>有效的 MBR 的最后两个字节是 0x55 和 0xAA。</p>
+<h1 id="实模式和保护模式">实模式和保护模式</h1>
+<h2 id="8086-cpu-的实模式">8086 CPU 的实模式</h2>
+<p>8086 CPU 只有 20 位地址线，所以其地址空间大小为 1 MB。它的寄存器大小均为 16 位，单个寄存器无法存下 20 位的地址。所以 8086 CPU 需要两个寄存器一起记录一个地址。地址表示的格式如下：</p>
+<pre><code>段基址:段内偏移量
+</code></pre>
+<p>它表示物理地址=(段基址 &lt;&lt; 4) + 段内偏移量</p>
+<p>段基址是由段寄存器提供的。8086 有 4 个 16 位的段寄存器：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CS</td>
+<td style="text-align:center">代码段</td>
+</tr>
+<tr>
+<td style="text-align:center">DS</td>
+<td style="text-align:center">数据段</td>
+</tr>
+<tr>
+<td style="text-align:center">SS</td>
+<td style="text-align:center">堆栈段</td>
+</tr>
+<tr>
+<td style="text-align:center">ES</td>
+<td style="text-align:center">附加段</td>
+</tr>
+</tbody>
+</table>
+<p>这样的表示方式表示的地址是真实的物理地址，这就是<strong>实</strong>模式。</p>
+<h2 id="实模式的缺陷">实模式的缺陷</h2>
+<p><code>CS:IP</code> 表示的是当前指令的真实地址（程序计数器）。</p>
+<p>考虑寄存器 CS 和 IP 的取值范围，理论上，<code>CS:IP</code> 可以表示的最大地址为 0xFFFF0 + 0xFFFF = 0x10FFEF。然而 8086 的地址线只有 20 位，所以 0x10FFEF 的最高位的 1 表示不出来，0x10FFEF 就会变成 0x0FFEF。</p>
+<p>因为寄存器中记录的都是实际的地址，所以进程可以随意访问其他进程的数据。这是不安全的。</p>
+<h2 id="保护模式">保护模式</h2>
+<p>保护模式就是为了保护进程的内存不被其他进程非法访问而产生的。在保护模式下，段寄存器不再直接记录实际地址（或其部分）。</p>
+<p>为了兼容旧代码，x86 还保留了实模式。现代计算机都会避免使用实模式（或者类似的运行方式）。只有在刚启动时能进入实模式，进入保护模式后就不能回到实模式了。</p>
+<h1 id="分析">分析</h1>
+<p>BIOS 在上电自检之后，会将执行权交给 Boot 程序。然而在移交执行权前，BIOS 要初始化处理器。BIOS 会把 CS 和 IP 寄存器设置为 0 和 0x7c00。刚启动时 CPU 处于实模式下，所以 PC 的实际地址为 (0 &lt;&lt; 4) + 0x7c00，即 0x7c00。</p>
+<p>所以 <strong>Boot 程序的首指令应该从 0x7c00 开始</strong>。</p>
+<p>因为 MBR 的最后两个字节要存储魔数，所以 MBR 的可用大小只有 510 字节。考虑到可扩展性，我们将在 MBR 中只写入第一阶段的 Boot 程序。（实际上 MBR 中可供引导程序使用的空间比 510 B 小得多，因为 MBR 中还需要记录分区信息）</p>
+<h1 id="代码">代码</h1>
+<p>下面使用英特尔式汇编语言和 NASM 编译器来设计一个 Boot 程序，它的主要功能只是打印一个字符串。</p>
+<pre><code>
+; boot.asm
+; 伪指令 org 告诉编译器这段代码的起始地址为 0x7c00
+; 如果没有这一行的话，生成的代码的起始地址为 0
+    org 0x7c00
+
+; 伪指令 equ 的作用是告诉编译器一个别名
+; 别名可以代表一个立即数、表达式或者字符串
+; 别名不能重新定义，也不会占用运行时的内存
+; BaseOfStack 表示堆栈的基址，这不是硬性规定，但
+; 堆栈从 0x7c00 向小地址方向增长，似乎很合理
+BaseOfStack equ 0x7c00
+
+; 将 CS 寄存器中的段基地址设置到 DS、ES、SS 等寄存器中（为什么？）
+; SP 寄存器记录栈顶位置。
+LabelStart:
+    mov     ax, cs
+    mov     ds, ax
+    mov     es, ax
+    mov     ss, ax
+    mov     ss, ax
+    mov     sp, BaseOfStack
+
+; clear screen
+    mov     ax, 0600h
+    int     10h
+
+; locate cursor
+    mov     ax, 0200h
+    mov     bx, 0000h
+    mov     dx, 0000h
+    int     10h
+
+; output to screen
+; &quot;Start Booting...&quot;
+    mov     ax, 1301h
+    mov     bx, 008bh
+    mov     dx, 0202h
+    mov     cx, 13h
+    push    ax
+    mov     ax, ds
+    mov     es, ax
+    pop     ax
+    mov     bp, StartBootMessage
+    int     10h
+
+; reset floppy
+    xor     ah, ah
+    xor     dl, dl
+    int     13h
+
+; nonstop loop
+    nop
+    nop
+    jmp     $-2
+
+StartBootMessage:   db  &quot;L: Start Booting...&quot;
+
+; fill zero into remaining area
+    times   510 - ($ - $$)  db  0
+    dw      0xaa55
+
+</code></pre>
+<h1 id="中断">中断</h1>
+<h1 id="调试">调试</h1>
+<h1 id="参考">参考</h1>
+<p><a href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E5%BC%95%E5%AF%BC%E8%AE%B0%E5%BD%95">主引导记录 - 维基百科</a><br>
+<a href="https://zhuanlan.zhihu.com/p/27401519">80286与保护模式 - 知乎</a><br>
+<a href="https://chyyuu.gitbooks.io/ucore_os_docs/">清华大学 ucore 实验指导书</a><br>
+田宇 - 《一个 64 位操作系统的设计与实现》 - 人民邮电出版社</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F%E5%92%8C%E4%B8%BB%E5%BC%95%E5%AF%BC%E8%AE%B0%E5%BD%95">引导程序和主引导记录</a></li>
+<li><a href="#%E4%B8%BB%E5%BC%95%E5%AF%BC%E8%AE%B0%E5%BD%95%E7%9A%84%E7%BB%93%E6%9E%84">主引导记录的结构</a>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8Fboot">第一阶段引导程序（Boot）</a></li>
+<li><a href="#%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E8%A1%A8">硬盘分区表</a></li>
+<li><a href="#%E9%AD%94%E6%95%B0%E6%A0%87%E5%BF%97">魔数标志</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F">实模式和保护模式</a>
+<ul>
+<li><a href="#8086-cpu-%E7%9A%84%E5%AE%9E%E6%A8%A1%E5%BC%8F">8086 CPU 的实模式</a></li>
+<li><a href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%BC%BA%E9%99%B7">实模式的缺陷</a></li>
+<li><a href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F">保护模式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+<li><a href="#%E4%B8%AD%E6%96%AD">中断</a></li>
+<li><a href="#%E8%B0%83%E8%AF%95">调试</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7ac54ec3f16b2bdb699a',
+    clientSecret: '89e58eb58e716f67ad2ab49d108a474b7906035f',
+    repo: 'kpgong.github.io',
+    owner: 'kpgong',
+    admin: ['kpgong'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://kpgong.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

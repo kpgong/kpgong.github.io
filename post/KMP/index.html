@@ -1,0 +1,339 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>看毛片算法 | 毀滅拳王的博客</title>
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1615957622479">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="看毛片算法 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+不是，你们都不看的吗？
+—— 某 V 老嗨
+
+问题
+现有两个字符串 A 和 B，要判断 B 是否是 A 的子串。这个问题叫作模式匹配。可能是子串的串（B）叫模式串，可能包含子串的串（A）叫主串。假设 A、B 的长度分别为 M,NM,NM,..." />
+    <meta name="keywords" content="字符串,算法" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      function load()
+      {
+        var _k = document.getElementsByClassName("post-content")
+        _k[0].innerHTML = _k[0].innerHTML.replace("", "/")
+      }
+    </script>
+  
+  </head>
+  <body onload="load()">
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://kpgong.github.io/">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1615957622479" alt="">
+  </a>
+  <h1 class="site-title">
+    毀滅拳王的博客
+  </h1>
+  <p class="site-description">
+    我汗都没流呢！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/kpgong" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              看毛片算法
+            </h2>
+            <div class="post-info">
+              <span>
+                2021年03月16日
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://kpgong.github.io/tag/zi-fu-chuan/" class="post-tag">
+                  # 字符串
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/suan-fa/" class="post-tag">
+                  # 算法
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>不是，你们都不看的吗？</p>
+<p>—— 某 V 老嗨</p>
+</blockquote>
+<h1 id="问题">问题</h1>
+<p>现有两个字符串 A 和 B，要判断 B 是否是 A 的子串。这个问题叫作<strong>模式匹配</strong>。可能是子串的串（B）叫<strong>模式串</strong>，可能包含子串的串（A）叫<strong>主串</strong>。假设 A、B 的长度分别为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo separator="true">,</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">M,N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>。</p>
+<h1 id="简单的模式匹配">简单的模式匹配</h1>
+<p>暴力：</p>
+<pre><code class="language-cpp">// Returns the index where the first character of sub appears in main
+// if sub is a sub-string of main,
+// or -1 otherwise.
+int search(string main, string sub)
+{
+#define in(ch, str) ((ch) &lt; (str).size())
+    for (int i = 0; i &lt; main.size(); i++)
+    {
+        int j = i, k = 0;
+        while (in(j, main) &amp;&amp; in(k, sub) &amp;&amp; main[j] == sub[k])
+        {
+            ++j;
+            ++k;
+        }
+        if (j == sub.size()) return i;
+    }
+    return -1;
+}
+</code></pre>
+<p>时间复杂度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">O</mi><mrow><mo fence="true">(</mo><mi>M</mi><mi>N</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omicron\left(MN\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathrm">O</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span>。太复杂了！（迫真）</p>
+<h1 id="特殊的情况">特殊的情况</h1>
+<pre><code class="language-cpp">     i  j
+A = &quot;abaabbababa&quot;
+B = &quot;ababa&quot;
+        k
+</code></pre>
+<p>按照上面的暴力方法，当 <code>i == 0, j == 3</code> 时，发现 <code>A[3] != B[3]</code>，下一步应该是令<code>i == 1, j == 0</code>，然后比较 <code>A[1]</code> 与 <code>B[0]</code>。</p>
+<pre><code class="language-cpp">      i
+      j
+A = &quot;abaabbababa&quot;
+B =  &quot;ababa&quot;
+      k
+</code></pre>
+<p>可以将上面代码中的 <code>i</code> 看作字符串 B 与字符串 A 的“相对位置”。当 <code>i == 0</code> 时，A 中的第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 个字符对齐于 B 中的第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 个字符；当 <code>i == 1</code> 时，A 中的第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 个字符对齐于 B 中的第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(k + 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 个字符；以此类推。每次比较字符，比较的都是 <code>A[j]</code> 和 <code>B[k]</code>。这就是<strong>双指针法</strong>。</p>
+<p>在 <code>i == 0</code> 时我们就已经访问过 <code>A[1]</code> 和 <code>B[0]</code> 且知道 <code>B[0] != A[1]</code>，没必要再一次比较，甚至可以直接跳过 <code>i == 1</code> 的情况——因为当“相对位置”为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 时，第一个对齐的字符都不一样。</p>
+<p>因为当 <code>i == 0</code> 时，我们已经知道 <code>A[2] == 'a'</code> 且 <code>B[0] == 'a'</code>，不妨直接快进到下面的情况：让 <code>A[2]</code> 和 <code>B[0]</code> 对齐，然后直接比较 <code>A[3]</code> 和 <code>B[1]</code>，即 <code>i == 2, j == 3, k == 1</code>。这样一来就跳过了好几次重复的比较。而且，相比于上面的暴力方法，指针 <code>j</code> 没有回头。这样的“快进”是利用了先前比较时得到的信息。</p>
+<pre><code class="language-cpp">       ij
+A = &quot;abaabbababa&quot;
+B =   &quot;ababa&quot;
+        k
+</code></pre>
+<p>不难发现，如果 B 的子串 <code>B[0..k-1]</code> 有相同的前缀和后缀，那么可以“快进”：跳过某些比较且指针 <code>j</code> 不需要回溯。</p>
+<h1 id="kmp-算法">KMP 算法</h1>
+<p>考虑 <code>B[k]</code> 未能成功匹配（下称“失配”）的情况，如果模式串已经匹配的部分有相同的前缀和后缀，假设最长的相同的前缀和后缀长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>。那么主串的指针不用移动，将模式串上的指针退回<strong>到</strong> <code>B[s]</code> 处重新比较即可。如果没有相同的前缀和后缀，那么应该将主串的指针向前移动一个位置，然后将模式串的指针退回到 <code>B[0]</code> 处。</p>
+<p>模式串上的指针每次退回时，退回的位置都只与模式串本身有关，所以可以预先处理记下退回位置。</p>
+<p>以上就是 KMP 算法的核心思想。如果模式串有很多重复出现的部分，那么 KMP 算法会很快；如果模式串中根本没有重复出现的部分，那么 KMP 算法与暴力算法相同。</p>
+<p>我们把 <code>B[k]</code> 失配后的退回位置记为 <code>next[k]</code>，则有</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>e</mi><mi>x</mi><mi>t</mi><mo>[</mo><mi>k</mi><mo>]</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mi>k</mi><mo>=</mo><mn>0</mn><mo separator="true">;</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mi mathvariant="normal">已</mi><mi mathvariant="normal">匹</mi><mi mathvariant="normal">配</mi><mi mathvariant="normal">部</mi><mi mathvariant="normal">分</mi><mi mathvariant="normal">中</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">长</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">相</mi><mi mathvariant="normal">同</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">缀</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">长</mi><mi mathvariant="normal">度</mi><mo separator="true">,</mo><mi>k</mi><mo>&gt;</mo><mn>0.</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">next[k]
+=\left\{\begin{aligned}
+&amp;-1, k = 0;\\ 
+&amp;已匹配部分中最长的相同前后缀的长度,k &gt; 0.
+\end{aligned}\right.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">x</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.00003em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7500000000000002em;"><span style="top:-3.75em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2500000000000002em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7500000000000002em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span><span class="mpunct">;</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord cjk_fallback">已</span><span class="mord cjk_fallback">匹</span><span class="mord cjk_fallback">配</span><span class="mord cjk_fallback">部</span><span class="mord cjk_fallback">分</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">长</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">相</span><span class="mord cjk_fallback">同</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">缀</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">长</span><span class="mord cjk_fallback">度</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span><span class="mord">.</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2500000000000002em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>指针不能退回到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 处，这里的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 表示要将主串的指针前移并将模式串的指针移到索引 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 处。请注意：<strong>上面提到的串的“前缀”及“后缀”均不是串本身</strong>，所以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>e</mi><mi>x</mi><mi>t</mi><mo>[</mo><mi>k</mi><mo>]</mo><mo>≤</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">next[k] \le k - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">x</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。</p>
+<p>数组 <code>next</code> 叫<strong>部分匹配表（Partial Match Table, PMT）</strong>。</p>
+<p>代码如下</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+vector&lt;int&gt; getNext(string str)
+{
+    vector&lt;int&gt; ret(str.size());
+    for (int i = 1; i &lt; str.size(); i++)
+    {
+        int k = ret[i - 1];
+        while (str[k] != str[i - 1])
+        {
+            if (k == 0)
+            {
+                k = -1;
+                break;
+            }
+            k = ret[k];
+        }
+        ret[i] = k + 1;
+        // Here, a string is not a prefix or a suffix of itself.
+        // So, next[i] is strictly less than i.
+        if (ret[i] == i) --ret[i];
+    }
+    ret[0] = -1;
+    return ret;
+}
+int search(string a, string b)
+{
+    auto next = getNext(b);
+    int i = 0, j = 0;
+    while (i &lt; a.size())
+    {
+        while (a[i] != b[j] &amp;&amp; i &lt; a.size())
+        {
+            j = next[j];
+            if (j &lt; 0)
+            {
+                ++i;
+                j = 0;
+            }
+        }
+        ++j, ++i;
+        if (j == b.size())
+            return i - b.size();
+    }
+    return -1;
+}
+int main()
+{
+    string a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; search(a, b) &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">简单的模式匹配</a></li>
+<li><a href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E6%83%85%E5%86%B5">特殊的情况</a></li>
+<li><a href="#kmp-%E7%AE%97%E6%B3%95">KMP 算法</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://kpgong.github.io/post/abc195/">
+              <h3 class="post-title">
+                ABC 195
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7ac54ec3f16b2bdb699a',
+    clientSecret: '89e58eb58e716f67ad2ab49d108a474b7906035f',
+    repo: 'kpgong.github.io',
+    owner: 'kpgong',
+    admin: ['kpgong'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://kpgong.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
