@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://kpgong.github.io/</id>
     <title>毀滅拳王的博客</title>
-    <updated>2021-06-09T08:34:47.546Z</updated>
+    <updated>2021-06-09T08:45:27.328Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://kpgong.github.io/"/>
     <link rel="self" href="https://kpgong.github.io/atom.xml"/>
@@ -288,100 +288,6 @@ void FFT(vector&lt;C&gt;&amp; x, bool inv)
     }
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[深入深出快速傅里叶变换]]></title>
-        <id>https://kpgong.github.io/post/fft-2/</id>
-        <link href="https://kpgong.github.io/post/fft-2/">
-        </link>
-        <updated>2021-03-23T08:16:23.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="fft-的优化">FFT 的优化</h1>
-<h1 id="求多项式之积">求多项式之积</h1>
-<p><a href="https://www.luogu.com.cn/problem/P3803">洛谷 P3803</a></p>
-<h2 id="输入格式">输入格式</h2>
-<p>第一行两个整数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo separator="true">,</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n,m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span></span></span></span></p>
-<p>接下来一行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个数字，从低到高表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的系数。</p>
-<p>接下来一行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个数字，从低到高表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">G(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的系数。</p>
-<h2 id="输出格式">输出格式</h2>
-<p>一行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mi>m</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+m+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个数字，从低到高表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>⋅</mo><mi>G</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F(x) \cdot G(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的系数</p>
-<h2 id="解答">解答</h2>
-<p>分成三步</p>
-<ul>
-<li>对两组系数进行 DFT</li>
-<li>将 DFT 产生的两组点相乘</li>
-<li>IDFT</li>
-</ul>
-<p>代码如下</p>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using C = complex&lt;double&gt;;
-
-const double PI = acos(-1);
-
-void FFT(vector&lt;C&gt;&amp; x, bool inv)
-{
-    int n = x.size();
-    if (n == 1) return;
-    int h = n / 2;
-    vector&lt;C&gt; odd(h), even(h);
-    for (int i = 0; i &lt; h; i++)
-    {
-        even[i] = x[i &lt;&lt; 1];
-        odd[i] = x[i &lt;&lt; 1 | 1];
-    }
-    FFT(odd, inv);
-    FFT(even, inv);
-
-    double rad = inv ? PI / h : -PI / h;
-    C acc = 1, w = exp(1.0i * rad), t;
-    for (int k = 0; k &lt; h; k++)
-    {
-        t = acc * odd[k];
-        x[k] = (even[k] + t);
-        x[k + h] = (even[k] - t);
-        acc *= w;
-    }
-}
-
-int extend(int a)
-{
-    int ret = 1;
-    while (ret &lt; a) ret &lt;&lt;= 1;
-    return ret;
-}
-
-int main()
-{
-    int n, m, len;
-    cin &gt;&gt; n &gt;&gt; m;
-    len = extend(n + m + 1);
-    vector&lt;C&gt; f(len), g(len);
-    for (int i = 0; i &lt;= n; i++) cin &gt;&gt; f[i];
-    for (int i = 0; i &lt;= m; i++) cin &gt;&gt; g[i];
-    FFT(f, false);
-    FFT(g, false);
-    for (int i = 0; i &lt; len; i++) f[i] *= g[i];
-    FFT(f, true);
-    for (int i = 0, e = n + m; i &lt;= e; i++)
-        cout &lt;&lt; (int) (abs(f[i]) / len + .5) &lt;&lt; ' ';
-    cout &lt;&lt; '\n';
-    return 0;
-}
-</code></pre>
-<p>要应用 FFT，应该将两组点序列的大小扩展为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的正整数幂。应该扩展到多大呢？具体地说，因为结果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span> 次多项式，所以两组点的大小应该不小于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span>。函数 <code>extend</code> 的作用就是找出大于 <code>a</code> 的最小的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的正整数幂。<code>len = extend(n + m + 1)</code> 就是点序列的长度。</p>
-<p>在输出之前，要将每一个数除以 <code>len</code>，保证正反变换之规范化因子之积为点序列长度的倒数。</p>
-<h1 id="求卷积">求卷积</h1>
-<p>所谓 FFT 求多项式之积，不过是 FFT 求卷积的一种子问题。</p>
-<p><a href="https://atcoder.jp/contests/abc196/tasks/abc196_f">F - Substring2, AtCoder Beginner Contest 196</a></p>
-<p><s>不会有人学了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 年还玩不明白新手赛吧？哦，原来是我自己啊😅</s></p>
-<h2 id="描述">描述</h2>
-<p>字符串 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo separator="true">,</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">S,T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 由 <code>0</code>、<code>1</code>组成。要使 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 的连续子串，至少需要改变 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 中的多少字符？</p>
-<p>注：<code>11</code> 不是 <code>101</code> 的连续子串。</p>
-<h2 id="输入">输入</h2>
-<p>两行。第一行为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>，第二行为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span>。</p>
-<h2 id="输出">输出</h2>
-<p>问题的答案</p>
 ]]></content>
     </entry>
     <entry>
@@ -885,7 +791,7 @@ objdump -d sdbl.c.out
 <h1 id="便">便</h1>
 <p>上面的操作是在 x86-64 的计算机上进行的。什么是 x86-64？x86-64 是指 CPU 的指令集架构。x86-64 架构是由超微半导体（AMD）在英特尔的 x86 架构上扩展而来的，又叫“x64”“AMD64”“Intel 64”。“64” 的意思就是 64 位字长，而 x86 是 32 位字长的架构。因为字长不同，所以这两个架构的 CPU 的寄存器也会不同。</p>
 <p>简单地说，能让程序员自由使用的寄存器就是<strong>通用寄存器（通用目的寄存器，General-purpose register，GPR）</strong>。<code>rax</code> 是，<code>eax</code> 也是。x86 有 8 个 32 位的通用寄存器。x64 有 16 个 64 位的通用寄存器。x64 的寄存器如下图：</p>
-<figure data-type="image" tabindex="1"><img src="https://kpgong.github.io//post-images/1613405797522.png" alt="x64 的寄存器示意图" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://kpgong.github.io//post-images/x64regsiter.png" alt="x64 的寄存器示意图" loading="lazy"></figure>
 <p>就像 IA32 兼容 IA16 那样，x64 也是兼容 x32 的。而 r8~r15 是 x64 新加入的通用寄存器。x64 的字长为 64，所以 32 位的寄存器不能完整记下它的地址了，所以寄存器 rsp 和 rbp 取代了 esp 和 ebp。x64 有着更多的寄存器，所以没有必要把参数存入 RAM 中的运行时栈了。使用寄存器暂存参数，程序会更快。</p>
 <p>使用寄存器暂存参数，另一个好处是，某些函数甚至不需要栈帧。下面使用 <code>-Og</code> 优化选项来编译 <code>sdbl.c</code>，然后查看函数 <code>getA_S</code> 的反汇编：</p>
 <pre><code class="language-cpp">000000000000119e &lt;getA_S&gt;:
@@ -1506,7 +1412,7 @@ void sieve(int r)
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span></span></p>
 <p>由贝祖定理， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\gcd(a,n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的整数倍，矛盾。故线性同余方程有解的充要条件是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\gcd(a,n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的整数倍。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>  </mtext><mtext>  </mtext><mtext mathvariant="monospace">■</mtext></mrow><annotation encoding="application/x-tex">\;\; \texttt{■}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord text"><span class="mord">■</span></span></span></span></span></p>
 <h2 id="求解">求解</h2>
-<p>线性同余方程可以转化为贝祖等式求解，构造 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>x</mi><mo>−</mo><mi>n</mi><mi>y</mi><mo>=</mo><mi>b</mi><mo>=</mo><mi>k</mi><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">ax-ny=b=k\gcd(a,n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 即可。</p>
+<p>线性同余方程可以转化为贝祖等式求解，构造 <span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \codt at position 10: ax-ny=b=k\̲c̲o̲d̲t̲\gcd(a,n)'>ax-ny=b=k\codt\gcd(a,n)</span> 即可。</p>
 <p><strong>诸 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 的周期应为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mi mathvariant="normal">/</mi><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>n</mi><mo>)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">b/\gcd(a,n).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mord">/</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></strong></p>
 <h1 id="模逆元">模逆元</h1>
 <p>显然，在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">a,b,m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span></span></span></span> 均为正整数时，下列关系成立：</p>

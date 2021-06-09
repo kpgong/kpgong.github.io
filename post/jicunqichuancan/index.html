@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>大人，食大便了 | 毀滅拳王的博客</title>
-<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623227510076">
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623228323952">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="大人，食大便了 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
@@ -35,7 +35,7 @@ ebp 入栈（然后 esp = esp - 1）
       <div class="main-content">
         <div class="site-header">
   <a href="https://kpgong.github.io/">
-  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623227510076" alt="">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623228323952" alt="">
   </a>
   <h1 class="site-title">
     毀滅拳王的博客
@@ -258,7 +258,7 @@ objdump -d sdbl.c.out
 <h1 id="便">便</h1>
 <p>上面的操作是在 x86-64 的计算机上进行的。什么是 x86-64？x86-64 是指 CPU 的指令集架构。x86-64 架构是由超微半导体（AMD）在英特尔的 x86 架构上扩展而来的，又叫“x64”“AMD64”“Intel 64”。“64” 的意思就是 64 位字长，而 x86 是 32 位字长的架构。因为字长不同，所以这两个架构的 CPU 的寄存器也会不同。</p>
 <p>简单地说，能让程序员自由使用的寄存器就是<strong>通用寄存器（通用目的寄存器，General-purpose register，GPR）</strong>。<code>rax</code> 是，<code>eax</code> 也是。x86 有 8 个 32 位的通用寄存器。x64 有 16 个 64 位的通用寄存器。x64 的寄存器如下图：</p>
-<figure data-type="image" tabindex="1"><img src="https://kpgong.github.io//post-images/1613405797522.png" alt="x64 的寄存器示意图" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://kpgong.github.io//post-images/x64regsiter.png" alt="x64 的寄存器示意图" loading="lazy"></figure>
 <p>就像 IA32 兼容 IA16 那样，x64 也是兼容 x32 的。而 r8~r15 是 x64 新加入的通用寄存器。x64 的字长为 64，所以 32 位的寄存器不能完整记下它的地址了，所以寄存器 rsp 和 rbp 取代了 esp 和 ebp。x64 有着更多的寄存器，所以没有必要把参数存入 RAM 中的运行时栈了。使用寄存器暂存参数，程序会更快。</p>
 <p>使用寄存器暂存参数，另一个好处是，某些函数甚至不需要栈帧。下面使用 <code>-Og</code> 优化选项来编译 <code>sdbl.c</code>，然后查看函数 <code>getA_S</code> 的反汇编：</p>
 <pre><code class="language-cpp">000000000000119e &lt;getA_S&gt;:
