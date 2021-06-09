@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://kpgong.github.io/</id>
     <title>毀滅拳王的博客</title>
-    <updated>2021-06-09T08:48:21.939Z</updated>
+    <updated>2021-06-09T08:59:30.686Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://kpgong.github.io/"/>
     <link rel="self" href="https://kpgong.github.io/atom.xml"/>
@@ -1495,6 +1495,185 @@ void sieve(int r)
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><msub><mi>a</mi><mi>i</mi></msub><msub><mi>t</mi><mi>i</mi></msub><msub><mi>M</mi><mi>i</mi></msub><mo>+</mo><munder><mo>∑</mo><mrow><mi>j</mi><mi mathvariant="normal">≠</mi><mi>i</mi></mrow></munder><mrow><msub><mi>a</mi><mi>j</mi></msub><msub><mi>t</mi><mi>j</mi></msub><msub><mi>M</mi><mi>j</mi></msub></mrow><mo>≡</mo><msub><mi>a</mi><mi>i</mi></msub><mspace></mspace><mspace width="1em"/><mo>(</mo><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.3333333333333333em"/><msub><mi>m</mi><mi>i</mi></msub><mo>)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x=a_{i}t_{i}M_{i}+\sum_{j\neq i}{a_{j}t_{j}M_{j}}\equiv a_i\pmod{m_{i}}.
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.488226em;vertical-align:-1.438221em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.8478869999999998em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight"><span class="mrel mtight"><span class="mord mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="rlap mtight"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel mtight"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel mtight">=</span></span><span class="mord mathdefault mtight">i</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.438221em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≡</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:1em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathrm">m</span><span class="mord mathrm">o</span><span class="mord mathrm">d</span></span></span><span class="mspace" style="margin-right:0.3333333333333333em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>  </mtext><mtext>  </mtext><mtext mathvariant="monospace">■</mtext></mrow><annotation encoding="application/x-tex">\;\;\texttt{■}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord text"><span class="mord">■</span></span></span></span></span></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[前缀树]]></title>
+        <id>https://kpgong.github.io/post/qianzhuishu/</id>
+        <link href="https://kpgong.github.io/post/qianzhuishu/">
+        </link>
+        <updated>2019-08-15T08:52:01.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="基本操作">基本操作</h1>
+<p>如果我们需要<strong>统计</strong>、<strong>排序</strong>或者<strong>保存</strong>大量<strong>字符串</strong>，就可以用到前缀树。</p>
+<p>举个例子，这里有一个集合，包含下面2个单词。</p>
+<blockquote>
+<p>apply<br>
+buy</p>
+</blockquote>
+<h2 id="查找">查找</h2>
+<p>如果要判断这个集合中是否有某个单词，我们可以把这2个单词建成下图表示的树：</p>
+<figure data-type="image" tabindex="1"><img src="https://kpgong.github.io//post-images/Trie_1.png" alt="" loading="lazy"></figure>
+<p>如果要判断这个集合中有没有“apply”这个词，我们可以从根结点开始向下逐层找。可以看到，树的第2层有“apply”的第1个字母、第3层有它的第2个字母。一直到第6层，每一层都有对应的字母，那么我们可以说，“apply”这个词在这个集合中。</p>
+<p>如果我们要查找的是“app”这个词呢？可以看到，按照上面的查找方式，我们会认为“app”这个词也在上面 的集合中——这就出问题了。</p>
+<p>为了避免这样的问题发生，我们可以<strong>在树中标记出每个单词的最后一个字母</strong>（图中两个单词的最后一个字母的结点都画成了黑白的结节）。我们再来找“app”这个词。虽然树中仍有“app”这个序列，但是结点“p”没有标记，即，<strong>字母“p”不是某个字符串的最后一个字母</strong>。所以我们可以说，原集合中是没有“app”这个词的。如果原集合中有“app”这个词，那么在路径“app”上的第二个“p”结点应该是黑白的才对。</p>
+<h2 id="添加">添加</h2>
+<p>如果要向原集合添加下列新单词，要怎么做呢？</p>
+<blockquote>
+<p>apex<br>
+but<br>
+car</p>
+</blockquote>
+<p>“apex”与原有的“apply”有着相同的前缀“ap”，不妨让它们共用相同的结点；而“car”的前缀是新出现的，就不得不为它创建全新结点了：</p>
+<p><img src="https://kpgong.github.io//post-images/Trie_2.png" alt="" loading="lazy"><br>
+同样地，<strong>为新加入的每个单词的最后一个字母做标记</strong>。这样一来，我们仍然能用上述方法准确地查找字符串。</p>
+<h2 id="统计">统计</h2>
+<p>前缀树也可以用来统计<strong>字符串</strong>的出现次数。</p>
+<p>树中的每一个带有标记的结点都对应一种<strong>字符串</strong>，而且这种对应关系是 <strong>一一对应</strong> 的，<strong>不会有多个有标记结点对应相同的字符串，也不会有一个有标记结点对应多个不同的字符串。</strong> 我们可以在带有标记结点中添加一个计数器记录这个字符串的出现次数。每一次添加字符串时，如果该字符串已经存在了，就为它的标记结点中的计数器加一。统计字符串出现次数时，只要看有标记结点中的计数器就行了。</p>
+<h1 id="优势">优势</h1>
+<p>上一节中，我们研究的字符串集合是</p>
+<blockquote>
+<p>apex<br>
+apply<br>
+but<br>
+buy<br>
+car</p>
+</blockquote>
+<p>如果我们不使用前缀树，直接查找“apply”，那我们会将“apply”与集合中的各个字符串的逐个字符依次比较。在这个例子中，由于“ap”同时是“apex”与“apply”的前缀，我们会将公共前缀序列“ap”重复比较两次。如果使用前缀树来查找，我们就可以避免重复地比较相同的前缀，只要沿着“ap”序列对应的路径往下走就可以了。</p>
+<p>概括起来，它的优点是<strong>利用字符串的公共前缀来减少查询时间，最大限度地减少重复的字符串比较</strong>。</p>
+<h1 id="缺点">缺点</h1>
+<p><strong>字符串长度过大</strong>或者<strong>字符集过大</strong>（即，字符种类过多）时，就不宜用前缀树了。</p>
+<p>如果字符串长度过大，前缀树就会很深，其查找的效率会降低，而且会占用很多空间。这种情况下可以改用 <strong>散列表（Hash table）</strong>。</p>
+<p>如果字符种类很多（比如说，输入中文文章），前缀树的每一层都会特别宽，也会占用很多空间。</p>
+<h1 id="常见应用">常见应用</h1>
+<h2 id="将字符串组按字典序排序">将字符串组按字典序排序</h2>
+<p>建立前缀树，将每个结点的子结点按字典序排序，然后先序遍历树并输出即可。</p>
+<p>如果用基于数组的邻接表来保存每个结点的子结点，并将字符按照字典序映射到数组下标，那么每个结点的子结点就自然是有序的了。</p>
+<p>代码如下：</p>
+<pre><code class="language-cpp">// ...
+struct Node
+{
+	int frequency = 0; // 以当前结点为结尾的单词个数。若不是结尾，值为 0 
+	char data = 0; // 存储该结点的字符
+	int children[26]; // 邻接表。将 'a'或者 'A'映射到下标 0
+
+	Node()
+	{
+		memset(children, -1, sizeof(children));// 将邻接表全部初始化为 -1
+	}
+};
+
+Node tree[1000]; // tree[0] 作为根结点，其中不存字符。
+string word;
+int pos, num, cur, len, ch;
+
+// 先序遍历树并输出
+void rfprint(int pos = 0, string buf = string(&quot;&quot;))
+{
+	if (tree[pos].data)
+		buf += tree[pos].data;
+	for (int i = tree[pos].frequency; i &gt; 0; --i)
+	{
+		cout &lt;&lt; buf;
+		putchar('\n');
+	}
+	for (const int i : tree[pos].children)
+		if (i &gt; -1)
+			rfprint(i, buf);
+}
+
+int main()
+{
+	while (cin &gt;&gt; word)
+	{
+		pos = 0; 
+		len = word.size();
+		for (auto i = 0; i &lt; len; ++i)
+		{
+		    // 只选取字符串中的英文字母，并将全部字母变为小写
+			if (isupper(word[i]))
+				ch = word[i] - 'A';
+			else if (islower(word[i]))
+				ch = word[i] - 'a';
+			else
+				continue;
+			if (tree[pos].children[ch] &lt; 0)
+				tree[pos].children[ch] = ++cur;
+			pos = tree[pos].children[ch];
+			tree[pos].data = word[i];
+		}
+		++tree[pos].frequency;
+	}
+	rfprint();
+	return 0;
+}
+</code></pre>
+<h2 id="查找最长公共前缀">查找最长公共前缀</h2>
+<p>建立前缀树，问题转化为求公共祖先数。</p>
+<h1 id="例题">例题</h1>
+<p><a href="https://www.luogu.org/problem/P2580">洛谷 P2580 于是他错误的点名开始了</a></p>
+<h2 id="题目描述">题目描述</h2>
+<p>给出一个班级中的学生的名单及老师的点名过程。对于每一次点名，判断该次点名是否正确。</p>
+<h2 id="输入格式">输入格式</h2>
+<p>第一行一个整数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>，表示学生人数。</p>
+<p>之后 n 行每行一个字符串表示姓名，只含小写字母，没有重复姓名，长度不超过 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>50</mn></mrow><annotation encoding="application/x-tex">50</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">0</span></span></span></span>。</p>
+<p>第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(n+2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span></span></span></span> 行一个整数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>，表示点名次数。</p>
+<p>之后 m 行每行一个字符串表示老师报的名字，只含小写字母，长度不超过 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>50</mn></mrow><annotation encoding="application/x-tex">50</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">0</span></span></span></span>。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>≤</mo><mn>10000</mn><mi mathvariant="normal">，</mi><mi>m</mi><mo>≤</mo><mn>100000</mn></mrow><annotation encoding="application/x-tex">n≤10000，m≤100000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord cjk_fallback">，</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span></p>
+<h2 id="输出格式">输出格式</h2>
+<p>对于每次点名，输出一行。如果该名字正确且是第一次出现，输出<code>OK</code>，如果该名字错误，输出<code>WRONG</code>，如果该名字正确但不是第一次出现，输出<code>REPEAT</code>。</p>
+<h2 id="代码">代码</h2>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#define INDEX(ch) (ch - 'a')
+
+char in[51];
+int tree[500003][26];
+// 邻接表
+// tree[0] 表示前缀树根结点的邻接表。
+// 字符 'a' 映射到下标 0
+char leaf[500003];
+// leaf[x] 记录 x 号结点是否为字符串的结尾，并记录这个字符串是否被访问过。
+// 2 表示&quot;已访问&quot;。1 表示&quot;未访问的结尾&quot;。0 表示&quot;不是结尾&quot;.
+
+int main()
+{
+	int pos, cur = 0, len, t;
+	scanf(&quot;%d&quot;, &amp;t);
+	getchar();
+	while (t--)
+	{
+		scanf(&quot;%s&quot;, in);
+		pos = 0;
+		for (int j = 0; in[j]; ++j)
+		{
+			if (tree[pos][INDEX(in[j])]  0)
+				tree[pos][INDEX(in[j])] = ++cur;
+			pos = tree[pos][INDEX(in[j])];
+		}
+		leaf[pos] = 1;
+	}
+	scanf(&quot;%d&quot;, &amp;t);
+	getchar();
+	while (t--)
+	{
+		scanf(&quot;%s&quot;, in);
+		len = strlen(in);
+		pos = 0;
+		for (int j = 0; j &lt; len; ++j)
+			if ((pos = tree[pos][INDEX(in[j])])  0)
+				break;
+		if (leaf[pos]  1)
+		{
+			printf(&quot;OK\n&quot;);
+			leaf[pos] = 2;
+		}
+		else
+			printf(leaf[pos] ? &quot;REPEAT\n&quot; : &quot;WRONG\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
 </feed>
