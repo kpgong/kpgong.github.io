@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>算法典中典1/90 | 毀滅拳王的博客</title>
-<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623262919272">
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623263128028">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="算法典中典1/90 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
@@ -33,7 +33,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://kpgong.github.io/">
-  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623262919272" alt="">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623263128028" alt="">
   </a>
   <h1 class="site-title">
     毀滅拳王的博客
@@ -117,7 +117,7 @@
 <p>输入均为整数</p>
 <h1 id="数据格式">数据格式</h1>
 <p>stdin:</p>
-<pre><code class="language-plain">N L
+<pre><code class="language-c">N L
 K
 A_1 A_2 A_3 ... A_N
 </code></pre>
@@ -125,12 +125,12 @@ A_1 A_2 A_3 ... A_N
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 的最大值</p>
 <h1 id="测试样例">测试样例</h1>
 <p>stdin:</p>
-<pre><code class="language-plain">3 34
+<pre><code class="language-c">3 34
 1
 8 13 26
 </code></pre>
 <p>stdout:</p>
-<pre><code class="language-plain">13
+<pre><code class="language-c">13
 </code></pre>
 <h1 id="解析">解析</h1>
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>∈</mo><mrow><mo fence="true">[</mo><mn>0</mn><mo separator="true">,</mo><mi>L</mi><mo>+</mo><mn>1</mn><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">S\in \left[0,L+1\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span> -&gt;某区间中的最值-&gt;二分法</p>
