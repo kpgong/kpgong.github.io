@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>深入深出慢速傅里叶变换 | 毀滅拳王的博客</title>
-<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1616488053178">
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623227510076">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="深入深出慢速傅里叶变换 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
@@ -15,7 +15,7 @@
 多项式的表示法
 有 nnn 次多项式 f(x)f(x)f(x)
 f(x)=∑..." />
-    <meta name="keywords" content="数值计算,多项式,复变函数,积分变换,程序设计竞赛" />
+    <meta name="keywords" content="数值计算,多项式,复变函数,积分变换" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
     <script>
@@ -32,7 +32,7 @@ f(x)=∑..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://kpgong.github.io/">
-  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1616488053178" alt="">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623227510076" alt="">
   </a>
   <h1 class="site-title">
     毀滅拳王的博客
@@ -113,10 +113,6 @@ f(x)=∑..." />
               
                 <a href="https://kpgong.github.io/tag/ji-fen-bian-huan/" class="post-tag">
                   # 积分变换
-                </a>
-              
-                <a href="https://kpgong.github.io/tag/cheng-xu-she-ji-jing-sai/" class="post-tag">
-                  # 程序设计竞赛
                 </a>
               
             </div>
@@ -369,13 +365,7 @@ x&amp;=\exp\left\{i\frac{2k\pi}{n}\right\}
 </table>
 <h1 id="代码实现-fft">代码实现 FFT</h1>
 <p>函数 <code>FFT</code> 接受一组离散数序列 <code>x</code>，要求离散数序列 <code>x</code> 长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的正整数幂。<code>inv</code> 指示是否为逆运算。变换后的序列会放在 <code>x</code> 中。没有将结果作为返回是为了节约时间。</p>
-<p>这段代码选用的规范化因子是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。因为是递归实现的，所以取其他规范化因子会不便于实现。<strong>如果要同时用到正变换和逆变换，注意在调用 <code>FFT</code> 函数之后手动调整规范化因子——正反变换的规范化因子之积应为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><msqrt><mi>N</mi></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{\sqrt{N}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.383108em;vertical-align:-0.538em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.537397em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord sqrt mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322900000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mtight" style="padding-left:0.833em;"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span><span style="top:-2.89229em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail mtight" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
--10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
--50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
-35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
--221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
-s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
-s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.10770999999999997em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.538em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>。</strong></p>
+<p>这段代码选用的规范化因子是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。因为是递归实现的，所以取其他规范化因子会不便于实现。<strong>如果要同时用到正变换和逆变换，注意在调用 <code>FFT</code> 函数之后手动调整规范化因子——正反变换的规范化因子之积应为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><mi>N</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>。</strong></p>
 <pre><code class="language-cpp">using C = complex&lt;double&gt;;
 void FFT(vector&lt;C&gt;&amp; x, bool inv)
 {
@@ -428,9 +418,9 @@ void FFT(vector&lt;C&gt;&amp; x, bool inv)
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://kpgong.github.io/post/KMP/">
+            <a href="https://kpgong.github.io/post/fft-2/">
               <h3 class="post-title">
-                看毛片算法
+                深入深出快速傅里叶变换
               </h3>
             </a>
           </div>

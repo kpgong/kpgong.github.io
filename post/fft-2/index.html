@@ -1,0 +1,331 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>深入深出快速傅里叶变换 | 毀滅拳王的博客</title>
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623227510076">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="深入深出快速傅里叶变换 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="FFT 的优化
+求多项式之积
+洛谷 P3803
+输入格式
+第一行两个整数 n,mn,mn,m
+接下来一行 n+1n+1n+1 个数字，从低到高表示 F(x)F(x)F(x) 的系数。
+接下来一行 m+1m+1m+1 个数字，从低到高表示 G..." />
+    <meta name="keywords" content="数值计算,多项式,复变函数,积分变换,程序设计竞赛" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      function load()
+      {
+        var _k = document.getElementsByClassName("post-content")
+        _k[0].innerHTML = _k[0].innerHTML.replace("", "/")
+      }
+    </script>
+  
+  </head>
+  <body onload="load()">
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://kpgong.github.io/">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623227510076" alt="">
+  </a>
+  <h1 class="site-title">
+    毀滅拳王的博客
+  </h1>
+  <p class="site-description">
+    我汗都没流呢！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/kpgong" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              深入深出快速傅里叶变换
+            </h2>
+            <div class="post-info">
+              <span>
+                2021年03月23日
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://kpgong.github.io/tag/shu-zhi-ji-suan/" class="post-tag">
+                  # 数值计算
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/duo-xiang-shi/" class="post-tag">
+                  # 多项式
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/fu-bian-han-shu/" class="post-tag">
+                  # 复变函数
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/ji-fen-bian-huan/" class="post-tag">
+                  # 积分变换
+                </a>
+              
+                <a href="https://kpgong.github.io/tag/cheng-xu-she-ji-jing-sai/" class="post-tag">
+                  # 程序设计竞赛
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="fft-的优化">FFT 的优化</h1>
+<h1 id="求多项式之积">求多项式之积</h1>
+<p><a href="https://www.luogu.com.cn/problem/P3803">洛谷 P3803</a></p>
+<h2 id="输入格式">输入格式</h2>
+<p>第一行两个整数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo separator="true">,</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n,m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span></span></span></span></p>
+<p>接下来一行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个数字，从低到高表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的系数。</p>
+<p>接下来一行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个数字，从低到高表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">G(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的系数。</p>
+<h2 id="输出格式">输出格式</h2>
+<p>一行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mi>m</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+m+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个数字，从低到高表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>⋅</mo><mi>G</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F(x) \cdot G(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的系数</p>
+<h2 id="解答">解答</h2>
+<p>分成三步</p>
+<ul>
+<li>对两组系数进行 DFT</li>
+<li>将 DFT 产生的两组点相乘</li>
+<li>IDFT</li>
+</ul>
+<p>代码如下</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using C = complex&lt;double&gt;;
+
+const double PI = acos(-1);
+
+void FFT(vector&lt;C&gt;&amp; x, bool inv)
+{
+    int n = x.size();
+    if (n == 1) return;
+    int h = n / 2;
+    vector&lt;C&gt; odd(h), even(h);
+    for (int i = 0; i &lt; h; i++)
+    {
+        even[i] = x[i &lt;&lt; 1];
+        odd[i] = x[i &lt;&lt; 1 | 1];
+    }
+    FFT(odd, inv);
+    FFT(even, inv);
+
+    double rad = inv ? PI / h : -PI / h;
+    C acc = 1, w = exp(1.0i * rad), t;
+    for (int k = 0; k &lt; h; k++)
+    {
+        t = acc * odd[k];
+        x[k] = (even[k] + t);
+        x[k + h] = (even[k] - t);
+        acc *= w;
+    }
+}
+
+int extend(int a)
+{
+    int ret = 1;
+    while (ret &lt; a) ret &lt;&lt;= 1;
+    return ret;
+}
+
+int main()
+{
+    int n, m, len;
+    cin &gt;&gt; n &gt;&gt; m;
+    len = extend(n + m + 1);
+    vector&lt;C&gt; f(len), g(len);
+    for (int i = 0; i &lt;= n; i++) cin &gt;&gt; f[i];
+    for (int i = 0; i &lt;= m; i++) cin &gt;&gt; g[i];
+    FFT(f, false);
+    FFT(g, false);
+    for (int i = 0; i &lt; len; i++) f[i] *= g[i];
+    FFT(f, true);
+    for (int i = 0, e = n + m; i &lt;= e; i++)
+        cout &lt;&lt; (int) (abs(f[i]) / len + .5) &lt;&lt; ' ';
+    cout &lt;&lt; '\n';
+    return 0;
+}
+</code></pre>
+<p>要应用 FFT，应该将两组点序列的大小扩展为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的正整数幂。应该扩展到多大呢？具体地说，因为结果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span> 次多项式，所以两组点的大小应该不小于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(n+m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span>。函数 <code>extend</code> 的作用就是找出大于 <code>a</code> 的最小的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 的正整数幂。<code>len = extend(n + m + 1)</code> 就是点序列的长度。</p>
+<p>在输出之前，要将每一个数除以 <code>len</code>，保证正反变换之规范化因子之积为点序列长度的倒数。</p>
+<h1 id="求卷积">求卷积</h1>
+<p>所谓 FFT 求多项式之积，不过是 FFT 求卷积的一种子问题。</p>
+<p><a href="https://atcoder.jp/contests/abc196/tasks/abc196_f">F - Substring2, AtCoder Beginner Contest 196</a></p>
+<p><s>不会有人学了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 年还玩不明白新手赛吧？哦，原来是我自己啊😅</s></p>
+<h2 id="描述">描述</h2>
+<p>字符串 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo separator="true">,</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">S,T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 由 <code>0</code>、<code>1</code>组成。要使 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 的连续子串，至少需要改变 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 中的多少字符？</p>
+<p>注：<code>11</code> 不是 <code>101</code> 的连续子串。</p>
+<h2 id="输入">输入</h2>
+<p>两行。第一行为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>，第二行为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span>。</p>
+<h2 id="输出">输出</h2>
+<p>问题的答案</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#fft-%E7%9A%84%E4%BC%98%E5%8C%96">FFT 的优化</a></li>
+<li><a href="#%E6%B1%82%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%8B%E7%A7%AF">求多项式之积</a>
+<ul>
+<li><a href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F">输入格式</a></li>
+<li><a href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F">输出格式</a></li>
+<li><a href="#%E8%A7%A3%E7%AD%94">解答</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B1%82%E5%8D%B7%E7%A7%AF">求卷积</a>
+<ul>
+<li><a href="#%E6%8F%8F%E8%BF%B0">描述</a></li>
+<li><a href="#%E8%BE%93%E5%85%A5">输入</a></li>
+<li><a href="#%E8%BE%93%E5%87%BA">输出</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://kpgong.github.io/post/KMP/">
+              <h3 class="post-title">
+                看毛片算法
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7ac54ec3f16b2bdb699a',
+    clientSecret: '89e58eb58e716f67ad2ab49d108a474b7906035f',
+    repo: 'kpgong.github.io',
+    owner: 'kpgong',
+    admin: ['kpgong'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://kpgong.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
