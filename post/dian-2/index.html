@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>算法典中典2/90 | 毀滅拳王的博客</title>
-<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623293089954">
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623397113222">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="算法典中典2/90 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
@@ -11,7 +11,8 @@
 
 
 
-    <meta name="description" content="问题描述
+    <meta name="description" content="题目来源：AtCoder-括号大全
+问题描述
 按字典序输出所有长度为 NNN 的合法括号串。
 难度：★★★☆☆☆☆
 数据范围
@@ -21,13 +22,8 @@ stdin_1:
 4
 
 stdout_1:
-(())
-()()
-
-stdin_2:
-3
-..." />
-    <meta name="keywords" content="算法典中典" />
+(())..." />
+    <meta name="keywords" content="算法典中典,程序设计竞赛" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
     <script>
@@ -44,7 +40,7 @@ stdin_2:
       <div class="main-content">
         <div class="site-header">
   <a href="https://kpgong.github.io/">
-  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623293089954" alt="">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623397113222" alt="">
   </a>
   <h1 class="site-title">
     毀滅拳王的博客
@@ -115,11 +111,16 @@ stdin_2:
                   # 算法典中典
                 </a>
               
+                <a href="https://kpgong.github.io/tag/cheng-xu-she-ji-jing-sai/" class="post-tag">
+                  # 程序设计竞赛
+                </a>
+              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="问题描述">问题描述</h1>
+                <p><a href="https://atcoder.jp/contests/typical90/tasks/typical90_b">题目来源：AtCoder-括号大全</a></p>
+<h1 id="问题描述">问题描述</h1>
 <p>按字典序输出所有长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 的合法括号串。</p>
 <p>难度：<code>★★★☆☆☆☆</code></p>
 <h1 id="数据范围">数据范围</h1>
@@ -153,7 +154,7 @@ def gen(s, l, r):
     if (r == n):
         res.append(s)
     else:
-        # 先考虑添加左括号，再考虑添加左括号
+        # 先考虑添加左括号，再考虑添加右括号
         # 保证了按字典序生成，不必再排序
         if (l &lt; n): # 左括号数不能超过n
             gen(s + &quot;(&quot;, l + 1, r)

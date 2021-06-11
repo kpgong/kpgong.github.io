@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>算法典中典1/90 | 毀滅拳王的博客</title>
-<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623293089954">
+<link rel="shortcut icon" href="https://kpgong.github.io//favicon.ico?v=1623397113222">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://kpgong.github.io//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="算法典中典1/90 | 毀滅拳王的博客 - Atom Feed" href="https://kpgong.github.io//atom.xml">
@@ -11,12 +11,11 @@
 
 
 
-    <meta name="description" content="问题描述
+    <meta name="description" content="题目来源：AtCoder-羊羹会
+问题描述
 有一纸带，长为 LLL，上面有 NNN 个折痕，第 iii 个折痕距最左端 AiA_iAi​. 在其中 KKK 个折痕处剪切，求 SSS 的最大值，SSS 是剪切后最短纸带之长度。
-难度：★★★★☆☆☆
-数据范围
-1≤K≤N≤10..." />
-    <meta name="keywords" content="算法典中典" />
+难度：★★★★..." />
+    <meta name="keywords" content="算法典中典,程序设计竞赛" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
     <script>
@@ -33,7 +32,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://kpgong.github.io/">
-  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623293089954" alt="">
+  <img class="avatar" src="https://kpgong.github.io//images/avatar.png?v=1623397113222" alt="">
   </a>
   <h1 class="site-title">
     毀滅拳王的博客
@@ -104,11 +103,16 @@
                   # 算法典中典
                 </a>
               
+                <a href="https://kpgong.github.io/tag/cheng-xu-she-ji-jing-sai/" class="post-tag">
+                  # 程序设计竞赛
+                </a>
+              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="问题描述">问题描述</h1>
+                <p><a href="https://atcoder.jp/contests/typical90/tasks/typical90_a">题目来源：AtCoder-羊羹会</a></p>
+<h1 id="问题描述">问题描述</h1>
 <p>有一纸带，长为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span></span></span></span>，上面有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 个折痕，第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个折痕距最左端 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">A_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>. 在其中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> 个折痕处剪切，求 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 的最大值，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 是剪切后最短纸带之长度。</p>
 <p>难度：<code>★★★★☆☆☆</code></p>
 <h1 id="数据范围">数据范围</h1>

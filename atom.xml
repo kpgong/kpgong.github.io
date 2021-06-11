@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://kpgong.github.io/</id>
     <title>毀滅拳王的博客</title>
-    <updated>2021-06-10T02:44:54.405Z</updated>
+    <updated>2021-06-11T07:38:38.708Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://kpgong.github.io/"/>
     <link rel="self" href="https://kpgong.github.io/atom.xml"/>
@@ -15,8 +15,9 @@
         <id>https://kpgong.github.io/post/dian-2/</id>
         <link href="https://kpgong.github.io/post/dian-2/">
         </link>
-        <updated>2021-06-09T19:02:09.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="问题描述">问题描述</h1>
+        <updated>2021-06-10T05:02:09.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://atcoder.jp/contests/typical90/tasks/typical90_b">题目来源：AtCoder-括号大全</a></p>
+<h1 id="问题描述">问题描述</h1>
 <p>按字典序输出所有长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 的合法括号串。</p>
 <p>难度：<code>★★★☆☆☆☆</code></p>
 <h1 id="数据范围">数据范围</h1>
@@ -50,7 +51,7 @@ def gen(s, l, r):
     if (r == n):
         res.append(s)
     else:
-        # 先考虑添加左括号，再考虑添加左括号
+        # 先考虑添加左括号，再考虑添加右括号
         # 保证了按字典序生成，不必再排序
         if (l &lt; n): # 左括号数不能超过n
             gen(s + &quot;(&quot;, l + 1, r)
@@ -71,7 +72,8 @@ if (n % 2 == 0):
         <link href="https://kpgong.github.io/post/dian-1/">
         </link>
         <updated>2021-06-09T17:55:53.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="问题描述">问题描述</h1>
+        <content type="html"><![CDATA[<p><a href="https://atcoder.jp/contests/typical90/tasks/typical90_a">题目来源：AtCoder-羊羹会</a></p>
+<h1 id="问题描述">问题描述</h1>
 <p>有一纸带，长为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span></span></span></span>，上面有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 个折痕，第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个折痕距最左端 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">A_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>. 在其中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> 个折痕处剪切，求 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 的最大值，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 是剪切后最短纸带之长度。</p>
 <p>难度：<code>★★★★☆☆☆</code></p>
 <h1 id="数据范围">数据范围</h1>
